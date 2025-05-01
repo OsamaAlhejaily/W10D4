@@ -27,12 +27,12 @@ jobs:
       run: dotnet build --configuration Release --no-restore
       
     - name: Run unit tests
-      run: dotnet test --configuration Release --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      run: dotnet test --configuration Release --no-build --verbosity normal --logger trx --results-directory ./TestResults
       
     - name: Upload test results
       uses: actions/upload-artifact@v3
       if: always()
       with:
         name: test-results
-        path: "**/TestResults/*.trx"
+        path: TestResults
         retention-days: 7
